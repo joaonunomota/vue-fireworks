@@ -1,2 +1,3 @@
-# vue-fireworks
-🎆 A wrapper to add fireworks to apps.
+# Vue-Fireworks
+
+A fireworks display all wrapped into one component.
