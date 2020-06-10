@@ -1,6 +1,8 @@
 <template>
-  <v-fireworks>
-    <div id="app"></div>
+  <v-fireworks v-slot="{ start }">
+    <div id="app">
+      <button @click="start">Press Me</button>
+    </div>
   </v-fireworks>
 </template>
 
@@ -15,4 +17,25 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+body {
+  margin: 0;
+}
+
+#app {
+  background: #102542;
+  height: 100vh;
+  width: 100vw;
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+}
+
+button {
+  background: transparent;
+  color: white;
+  margin: 30px;
+  border: 0 none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+</style>
