@@ -1,18 +1,21 @@
 <template>
-  <v-fireworks v-slot="{ start }">
+  <v-fireworks v-slot="{ play, pause, stop }">
     <div id="app">
-      <button @click="start">Press Me</button>
+      <v-media-button action="play" @click="play" />
+      <v-media-button action="pause" @click="pause" />
+      <v-media-button action="stop" @click="stop" />
     </div>
   </v-fireworks>
 </template>
 
 <script>
-import { VFireworks } from "./components";
+import { VFireworks, VMediaButton } from "./components";
 
 export default {
   name: "App",
   components: {
-    VFireworks
+    VFireworks,
+    VMediaButton
   }
 };
 </script>

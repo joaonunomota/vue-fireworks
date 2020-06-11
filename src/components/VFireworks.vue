@@ -1,7 +1,7 @@
 <template>
   <div ref="container">
     <canvas id="overlay" ref="overlay"></canvas>
-    <slot :start="draw"></slot>
+    <slot :play="play" :pause="pause" :stop="stop"></slot>
   </div>
 </template>
 
@@ -9,7 +9,8 @@
 export default {
   name: "VFireworks",
   data: () => ({
-    context: null
+    context: null,
+    freeze: false,
   }),
   mounted: function() {
     if (this.$refs.overlay !== undefined) {
@@ -17,11 +18,39 @@ export default {
     }
   },
   methods: {
-    draw: function() {
+    draw: function(timestamp) {
+      if (this.freeze) {
+        this.freeze = false;
+        return;
+      }
+
       if (this.$refs.container !== undefined) {
         this.context.canvas.height = this.$refs.container.clientHeight;
         this.context.canvas.width = this.$refs.container.clientWidth;
       }
+
+      this.clear();
+      this.item.draw(this.context);
+
+      window.requestAnimationFrame(this.draw);
+    },
+    play: function() {
+      window.requestAnimationFrame(this.draw);
+    },
+    pause: function() {
+      this.freeze = true;
+    },
+    stop: function() {
+      this.freeze = true;
+      this.clear();
+    },
+    clear: function() {
+      this.context.clearRect(
+        0,
+        0,
+        this.context.canvas.width,
+        this.context.canvas.height
+      );
     }
   }
 };
