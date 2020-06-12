@@ -35,6 +35,7 @@ export default {
       window.requestAnimationFrame(this.draw);
     },
     play: function() {
+      this.freeze = false;
       window.requestAnimationFrame(this.draw);
     },
     pause: function() {
