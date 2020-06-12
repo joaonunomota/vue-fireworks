@@ -5,7 +5,7 @@
     :disabled="disabled"
     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
     type="image"
-    @click="$emit('clicks')"
+    @click="$emit('click')"
   />
 </template>
 <script>
@@ -41,10 +41,10 @@ input[type="image"].play {
 }
 
 input[type="image"].pause {
-  background-position: 100% 0;
+  background-position: 50% 0;
 }
 
 input[type="image"].stop {
-  background-position: 200% 0;
+  background-position: 100% 0;
 }
 </style>
