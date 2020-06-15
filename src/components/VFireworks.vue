@@ -6,52 +6,28 @@
 </template>
 
 <script>
+import { director, actor } from "../models";
+
 export default {
   name: "VFireworks",
   data: () => ({
-    context: null,
-    freeze: false,
+    director: null
   }),
   mounted: function() {
-    if (this.$refs.overlay !== undefined) {
-      this.context = this.$refs.overlay.getContext("2d");
+    if ([this.$refs.overlay, this.$refs.container].indexOf(undefined) === -1) {
+      const context = this.$refs.overlay.getContext("2d");
+      this.director = director(context, this.$refs.container, [actor(context)]);
     }
   },
   methods: {
-    draw: function(timestamp) {
-      if (this.freeze) {
-        this.freeze = false;
-        return;
-      }
-
-      if (this.$refs.container !== undefined) {
-        this.context.canvas.height = this.$refs.container.clientHeight;
-        this.context.canvas.width = this.$refs.container.clientWidth;
-      }
-
-      this.clear();
-      this.item.draw(this.context);
-
-      window.requestAnimationFrame(this.draw);
-    },
     play: function() {
-      this.freeze = false;
-      window.requestAnimationFrame(this.draw);
+      this.director.play();
     },
     pause: function() {
-      this.freeze = true;
+      this.director.pause();
     },
     stop: function() {
-      this.freeze = true;
-      this.clear();
-    },
-    clear: function() {
-      this.context.clearRect(
-        0,
-        0,
-        this.context.canvas.width,
-        this.context.canvas.height
-      );
+      this.director.stop();
     }
   }
 };

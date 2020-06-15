@@ -8,6 +8,7 @@
     @click="$emit('click')"
   />
 </template>
+
 <script>
 export default {
   name: "VMediaButton",
@@ -27,6 +28,7 @@ export default {
   }
 };
 </script>
+
 <style>
 input[type="image"] {
   height: 32px;
