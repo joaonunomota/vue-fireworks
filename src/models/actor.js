@@ -1,34 +1,37 @@
-const actor = context => {
+const actor = (context, style) => {
   let x = 0,
     y = 0,
     size = 5,
     color = "white";
 
-  const a = {
-    draw: () => {
-      context.beginPath();
-      context.arc(x, y, size, 0, Math.PI * 2);
+  return {
+    draw: function () {
       context.fillStyle = color;
-      context.fill();
+      if (style === "square") {
+        context.fillRect(x, y, size, size);
+      } else {
+        context.beginPath();
+        context.arc(x, y, size / 2, 0, Math.PI * 2);
+        context.fill();
+      }
 
-      return a;
+      return this;
     },
-    update: () => {
+    update: function () {
       x = y += 1;
 
-      return a;
+      return this;
     },
-    reset: () => {
+    reset: function () {
       x = 0;
       y = 0;
       size = 5;
       color = "white";
 
-      return a;
+      return this;
     }
   };
-
-  return a;
 };
 
 export { actor };
+

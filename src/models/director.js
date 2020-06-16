@@ -1,7 +1,7 @@
 const director = (context, container, actors) => {
   let action = "";
 
-  const draw = () => {
+  const draw = function() {
     if (container !== undefined) {
       context.canvas.height = container.clientHeight;
       context.canvas.width = container.clientWidth;
@@ -19,7 +19,7 @@ const director = (context, container, actors) => {
   };
 
   return {
-    play: () => {
+    play: function() {
       if (action !== "play" && action !== "pause") {
         action = "play";
         window.requestAnimationFrame(draw);
@@ -27,12 +27,12 @@ const director = (context, container, actors) => {
         action = "play";
       }
     },
-    pause: () => {
+    pause: function() {
       if (action !== "stop") {
         action = "pause";
       }
     },
-    stop: () => {
+    stop: function() {
       action = "stop";
     }
   };

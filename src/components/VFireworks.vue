@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { director, actor } from "../models";
+import { actor, director } from "../models";
 
 export default {
   name: "VFireworks",
@@ -16,7 +16,9 @@ export default {
   mounted: function() {
     if ([this.$refs.overlay, this.$refs.container].indexOf(undefined) === -1) {
       const context = this.$refs.overlay.getContext("2d");
-      this.director = director(context, this.$refs.container, [actor(context)]);
+      this.director = director(context, this.$refs.container, [
+        actor(context, "circle")
+      ]);
     }
   },
   methods: {
