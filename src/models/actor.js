@@ -5,7 +5,7 @@ const actor = (context, style) => {
     color = "white";
 
   return {
-    draw: function () {
+    draw: function() {
       context.fillStyle = color;
       if (style === "square") {
         context.fillRect(x, y, size, size);
@@ -17,12 +17,12 @@ const actor = (context, style) => {
 
       return this;
     },
-    update: function () {
+    update: function() {
       x = y += 1;
 
       return this;
     },
-    reset: function () {
+    reset: function() {
       x = 0;
       y = 0;
       size = 5;
@@ -34,4 +34,3 @@ const actor = (context, style) => {
 };
 
 export { actor };
-
