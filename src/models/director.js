@@ -7,14 +7,18 @@ const director = (context, container, actors) => {
       context.canvas.width = container.clientWidth;
     }
 
-    if (action === "pause") {
-      actors.forEach(a => a.draw());
-      window.requestAnimationFrame(draw);
-    } else if (action === "stop") {
+    if (action === "stop") {
       actors.forEach(a => a.reset());
     } else {
-      actors.forEach(a => a.update().draw());
-      window.requestAnimationFrame(draw);
+      let live = actors.filter(a => a.timer > 0);
+
+      action === "pause"
+        ? live.forEach(a => a.draw())
+        : live.forEach(a => a.update().draw());
+
+      if (live.length > 0) {
+        window.requestAnimationFrame(draw);
+      }
     }
   };
 

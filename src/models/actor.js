@@ -7,6 +7,7 @@ const actor = (context, style, angle, speed) => {
     dy = speed * Math.sin((angle * Math.PI) / 180);
 
   return {
+    timer: 100,
     draw: function() {
       context.fillStyle = color;
       if (style === "square") {
@@ -22,6 +23,7 @@ const actor = (context, style, angle, speed) => {
     update: function() {
       x += dx;
       y += dy;
+      this.timer -= 1;
 
       return this;
     },
