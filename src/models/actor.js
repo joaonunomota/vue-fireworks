@@ -1,6 +1,8 @@
 const actor = (context, style, angle, speed) => {
-  const size = 5,
-    color = "white";
+  const size = 20,
+    color = "white",
+    friction = 0.98,
+    gravity = 0.03;
   let x = context.canvas.width / 2 - size / 2,
     y = context.canvas.height / 2 - size / 2,
     dx = speed * Math.cos((angle * Math.PI) / 180),
@@ -21,6 +23,8 @@ const actor = (context, style, angle, speed) => {
       return this;
     },
     update: function() {
+      dx = dx * friction;
+      dy = (dy + gravity) * friction;
       x += dx;
       y += dy;
       this.timer -= 1;
