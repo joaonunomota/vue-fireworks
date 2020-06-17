@@ -1,8 +1,10 @@
-const actor = (context, style) => {
-  let x = 0,
-    y = 0,
-    size = 5,
+const actor = (context, style, angle, speed) => {
+  const size = 5,
     color = "white";
+  let x = context.canvas.width / 2 - size / 2,
+    y = context.canvas.height / 2 - size / 2,
+    dx = speed * Math.cos((angle * Math.PI) / 180),
+    dy = speed * Math.sin((angle * Math.PI) / 180);
 
   return {
     draw: function() {
@@ -18,15 +20,16 @@ const actor = (context, style) => {
       return this;
     },
     update: function() {
-      x = y += 1;
+      x += dx;
+      y += dy;
 
       return this;
     },
     reset: function() {
-      x = 0;
-      y = 0;
-      size = 5;
-      color = "white";
+      x = context.canvas.width / 2 - size / 2;
+      y = context.canvas.height / 2 - size / 2;
+      dx = speed * Math.cos((angle * Math.PI) / 180);
+      dy = speed * Math.sin((angle * Math.PI) / 180);
 
       return this;
     }
