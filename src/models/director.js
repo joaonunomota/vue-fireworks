@@ -1,24 +1,28 @@
-const director = (context, container, actors) => {
+const director = (overlay, container, actors) => {
   let action = "";
 
-  const draw = function() {
+  const resize = function() {
     if (container !== undefined) {
-      context.canvas.height = container.clientHeight;
-      context.canvas.width = container.clientWidth;
+      let scale = window.devicePixelRatio;
+
+      overlay.height = Math.floor(container.clientHeight * scale);
+      overlay.width = Math.floor(container.clientWidth * scale);
     }
+  };
 
-    if (action === "stop") {
-      actors.forEach(a => a.reset());
-    } else {
-      let live = actors.filter(a => a.timer > 0);
+  const draw = function() {
+    resize();
+    let live = actors.filter(a => a.timer > 0);
 
+    if (action !== "stop" && live.length > 0) {
       action === "pause"
         ? live.forEach(a => a.draw())
         : live.forEach(a => a.update().draw());
 
-      if (live.length > 0) {
-        window.requestAnimationFrame(draw);
-      }
+      window.requestAnimationFrame(draw);
+    } else {
+      action = "stop";
+      actors.forEach(a => a.reset());
     }
   };
 

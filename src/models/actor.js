@@ -36,6 +36,7 @@ const actor = (context, style, angle, speed) => {
       y = context.canvas.height / 2 - size / 2;
       dx = speed * Math.cos((angle * Math.PI) / 180);
       dy = speed * Math.sin((angle * Math.PI) / 180);
+      this.timer = 100;
 
       return this;
     }

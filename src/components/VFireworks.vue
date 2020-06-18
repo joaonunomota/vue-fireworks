@@ -16,7 +16,7 @@ export default {
   mounted: function() {
     if ([this.$refs.overlay, this.$refs.container].indexOf(undefined) === -1) {
       const context = this.$refs.overlay.getContext("2d");
-      this.director = director(context, this.$refs.container, [
+      this.director = director(this.$refs.overlay, this.$refs.container, [
         actor(context, "circle", 45, 2),
         actor(context, "square", 135, 2),
         actor(context, "circle", 225, 2),
