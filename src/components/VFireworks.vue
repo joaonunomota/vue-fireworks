@@ -17,10 +17,8 @@ export default {
     if ([this.$refs.overlay, this.$refs.container].indexOf(undefined) === -1) {
       const context = this.$refs.overlay.getContext("2d");
       this.director = director(this.$refs.overlay, this.$refs.container, [
-        actor(context, "circle", 45, 2),
-        actor(context, "square", 135, 2),
-        actor(context, "circle", 225, 2),
-        actor(context, "square", 315, 2)
+        actor(context, "circle", 45, 55, 10, 50, 15),
+        actor(context, "square", 315, 45, 20, 30, 0)
       ]);
     }
   },

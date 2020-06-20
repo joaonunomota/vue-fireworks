@@ -12,7 +12,7 @@ const director = (overlay, container, actors) => {
 
   const draw = function() {
     resize();
-    let live = actors.filter(a => a.timer > 0);
+    let live = actors.filter(a => a.despawn > 0);
 
     if (action !== "stop" && live.length > 0) {
       action === "pause"
