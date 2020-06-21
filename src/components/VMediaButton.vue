@@ -2,7 +2,6 @@
   <input
     :alt="action"
     :class="action"
-    :disabled="disabled"
     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
     type="image"
     @click="$emit('click')"
@@ -16,14 +15,7 @@ export default {
     action: {
       type: String,
       required: true,
-      validator: value =>
-        value !== undefined && ["play", "pause", "stop"].indexOf(value) !== -1
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-      default: false,
-      validator: value => value !== undefined
+      validator: value => ["play", "pause", "stop"].indexOf(value) !== -1
     }
   }
 };
