@@ -6,21 +6,22 @@
 </template>
 
 <script>
-import { actor, director } from "../models";
+import { actor, director, scene } from "../models";
 
 export default {
   name: "VFireworks",
   data: () => ({
-    director: null
+    director: null,
+    scene: null
   }),
   mounted: function() {
-    if ([this.$refs.overlay, this.$refs.container].indexOf(undefined) === -1) {
-      const context = this.$refs.overlay.getContext("2d");
-      this.director = director(this.$refs.overlay, this.$refs.container, [
-        actor(context, "circle", 45, 55, 10, 50, 15),
-        actor(context, "square", 315, 45, 20, 30, 0)
-      ]);
-    }
+    this.scene = scene(
+      this.$refs.overlay,
+      this.$refs.container,
+      [actor(10, 10, 0, 1, 10)],
+      "square"
+    );
+    this.director = director(this.scene);
   },
   methods: {
     play: function() {
