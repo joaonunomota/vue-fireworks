@@ -35,6 +35,7 @@ export function scene(overlay, container, actors, style) {
     resize: function() {
       overlay.height = Math.floor(container.clientHeight * scale);
       overlay.width = Math.floor(container.clientWidth * scale);
+      context.scale(scale, scale);
     }
   };
 }
