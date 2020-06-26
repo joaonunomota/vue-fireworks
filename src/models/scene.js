@@ -3,6 +3,8 @@ import { circle, clear, square } from "../utils";
 export function scene(overlay, container, actors, style) {
   const scale = window.devicePixelRatio,
     context = overlay.getContext("2d"),
+    friction = 0.98,
+    gravity = 0.97,
     draw = (function() {
       switch (style) {
         case "square":
@@ -24,8 +26,9 @@ export function scene(overlay, container, actors, style) {
     draw: draw,
     update: function() {
       this.actors.forEach(a => {
-        a.x += a.dx;
-        a.y += a.dy;
+        a.speed *= friction;
+        a.x += Math.sin((a.angle * Math.PI) / 180) * a.speed;
+        a.y += Math.cos((a.angle * Math.PI) / 180) * a.speed + gravity;
       });
     },
     reset: function() {
