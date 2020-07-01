@@ -1,12 +1,17 @@
 export function director(scene) {
-  let action = "";
+  let action = "",
+    start = null;
 
-  const draw = function() {
+  const draw = function(timestamp) {
     if (action === "play") {
-      scene.update();
+      if (start === null) {
+        start = timestamp;
+      }
+      scene.update((60 * (timestamp - start)) / 1000);
       scene.draw();
       window.requestAnimationFrame(draw);
     } else if (action === "stop") {
+      start = null;
       scene.reset();
     }
   };

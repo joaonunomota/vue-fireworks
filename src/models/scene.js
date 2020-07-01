@@ -4,7 +4,7 @@ export function scene(overlay, container, actors, style) {
   const scale = window.devicePixelRatio,
     context = overlay.getContext("2d"),
     friction = 0.98,
-    gravity = 0.97,
+    gravity = 2,
     draw = (function() {
       switch (style) {
         case "square":
@@ -24,11 +24,14 @@ export function scene(overlay, container, actors, style) {
   return {
     actors: actors,
     draw: draw,
-    update: function() {
+    update: function(steps) {
       this.actors.forEach(a => {
-        a.speed *= friction;
-        a.x += Math.sin((a.angle * Math.PI) / 180) * a.speed;
-        a.y += Math.cos((a.angle * Math.PI) / 180) * a.speed + gravity;
+        const angle = (a.angle * Math.PI) / 180,
+          distance =
+            (a.speed * (Math.pow(friction, steps + 1) - friction)) /
+            (friction - 1);
+        a.x = a.xs + Math.sin(angle) * distance;
+        a.y = a.ys + Math.cos(angle) * distance + steps * gravity;
       });
     },
     reset: function() {

@@ -18,7 +18,7 @@ export default {
     this.scene = scene(
       this.$refs.overlay,
       this.$refs.container,
-      [actor(10, 10, 0, 1, 10)],
+      [actor(700, 700, 200, 20, 10)],
       "square"
     );
     this.director = director(this.scene);
