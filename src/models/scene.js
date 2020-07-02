@@ -31,7 +31,7 @@ export function scene(overlay, container, actors, style) {
             (a.speed * (Math.pow(friction, steps + 1) - friction)) /
             (friction - 1);
         a.x = a.xs + Math.sin(angle) * distance;
-        a.y = a.ys + Math.cos(angle) * distance + steps * gravity;
+        a.y = a.ys + Math.cos(angle) * distance - steps * gravity;
       });
     },
     reset: function() {
