@@ -45,5 +45,10 @@ export default {
   left: 0;
   height: 100%;
   width: 100%;
+  -moz-transform: scale(1, -1);
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  transform: scale(1, -1);
+  filter: FlipY;
 }
 </style>
