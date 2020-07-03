@@ -1,18 +1,27 @@
 export function director(scene) {
   let action = "",
-    start = null;
+    playPressed = null,
+    pausePressed = null;
 
   const draw = function(timestamp) {
     if (action === "play") {
-      if (start === null) {
-        start = timestamp;
+      if (playPressed === null) {
+        playPressed = timestamp;
       }
-      scene.update((60 * (timestamp - start)) / 1000);
+
+      if (pausePressed !== null) {
+        playPressed += timestamp - pausePressed;
+        pausePressed = null;
+      }
+
+      scene.update((60 * (timestamp - playPressed)) / 1000);
       scene.draw();
       window.requestAnimationFrame(draw);
     } else if (action === "stop") {
-      start = null;
+      playPressed = null;
       scene.reset();
+    } else {
+      pausePressed = timestamp;
     }
   };
 
