@@ -14,8 +14,7 @@ export function director(scene) {
         pausePressed = null;
       }
 
-      scene.update((60 * (timestamp - playPressed)) / 1000);
-      scene.draw();
+      scene.draw((60 * (timestamp - playPressed)) / 1000);
       window.requestAnimationFrame(draw);
     } else if (action === "stop") {
       playPressed = null;

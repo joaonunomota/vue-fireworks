@@ -5,34 +5,25 @@ export function scene(overlay, container, actors, style) {
     context = overlay.getContext("2d"),
     friction = 0.98,
     gravity = 2,
-    draw = (function() {
-      switch (style) {
-        case "square":
-          return function() {
-            clear(context);
-            this.actors.forEach(a => square(context, a));
-          };
-        case "circle":
-        default:
-          return function() {
-            clear(context);
-            this.actors.forEach(a => circle(context, a));
-          };
-      }
-    })();
+    draw =
+      style === "square" ? a => square(context, a) : a => circle(context, a);
 
   return {
     actors: actors,
-    draw: draw,
-    update: function(steps) {
-      this.actors.forEach(a => {
-        const angle = (a.angle * Math.PI) / 180,
-          distance =
-            (a.speed * (Math.pow(friction, steps + 1) - friction)) /
-            (friction - 1);
-        a.x = a.xs + Math.sin(angle) * distance;
-        a.y = a.ys + Math.cos(angle) * distance - steps * gravity;
-      });
+    draw: function(steps) {
+      clear(context);
+      this.actors
+        .filter(a => steps >= a.spawn && steps < a.despawn)
+        .forEach(a => {
+          const angle = (a.angle * Math.PI) / 180,
+            actorSteps = steps - a.spawn,
+            distance =
+              (a.speed * (Math.pow(friction, actorSteps + 1) - friction)) /
+              (friction - 1);
+          a.x = a.xs + Math.sin(angle) * distance;
+          a.y = a.ys + Math.cos(angle) * distance - actorSteps * gravity;
+          draw(a);
+        });
     },
     reset: function() {
       clear(context);

@@ -1,4 +1,4 @@
-export function actor(x, y, angle, speed, size) {
+export function actor(x, y, angle, speed, size, spawn, despawn) {
   return {
     x: x,
     y: y,
@@ -6,14 +6,13 @@ export function actor(x, y, angle, speed, size) {
     ys: y,
     angle: angle,
     speed: speed,
+    despawn: despawn,
+    spawn: spawn,
     size: size,
     color: "white",
     reset: function() {
       this.x = x;
       this.y = y;
-      this.xs = x;
-      this.ys = y;
-      this.speed = speed;
 
       return this;
     }

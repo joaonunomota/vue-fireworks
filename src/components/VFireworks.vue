@@ -18,7 +18,12 @@ export default {
     this.scene = scene(
       this.$refs.overlay,
       this.$refs.container,
-      [actor(700, 0, 30, 20, 10)],
+      [
+        actor(700, 0, 350, 20, 5, 0, 330),
+        actor(550, 0, 20, 20, 10, 0, 240),
+        actor(850, 0, 5, 20, 5, 300, 600),
+        actor(650, 0, 330, 20, 10, 600, 900)
+      ],
       "square"
     );
     this.director = director(this.scene);
@@ -45,9 +50,6 @@ export default {
   left: 0;
   height: 100%;
   width: 100%;
-  -moz-transform: scale(1, -1);
-  -webkit-transform: scale(1, -1);
-  -o-transform: scale(1, -1);
   transform: scale(1, -1);
   filter: FlipY;
 }
